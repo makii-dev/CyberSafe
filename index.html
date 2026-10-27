@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>CyberSafe: Cybersecurity Awareness for Students</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style type="text/tailwindcss">
+@layer components{
+.card{@apply backdrop-blur-md bg-slate-900/60 border border-slate-800 rounded-2xl p-5}
+.btn{@apply inline-flex items-center justify-center min-h-[44px] px-5 rounded-xl font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 disabled:opacity-50}
+.pri{@apply bg-emerald-400 text-slate-950 hover:bg-emerald-300}
+.sec{@apply border border-slate-700 hover:bg-slate-800}
+.inp{@apply w-full min-h-[44px] rounded-xl bg-slate-950 border border-slate-700 px-3 focus:outline-none focus:ring-2 focus:ring-emerald-400}
+.nl{@apply inline-flex items-center min-h-[44px] px-3 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800}
+.ml{@apply block py-3 text-2xl border-b border-slate-800}
+}
+</style>
+<style>
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+a[aria-current=page]{color:#34d399;background:rgba(52,211,153,.1)}
+[data-tip]{border-bottom:1px dotted #34d399;cursor:help;position:relative}
+[data-tip]:hover::after,[data-tip]:focus::after{content:attr(data-tip);position:absolute;left:0;top:100%;z-index:30;width:14rem;padding:.5rem;border-radius:.5rem;background:#0f172a;border:1px solid #334155;font-size:.75rem;color:#e2e8f0}
+.burger span{display:block;width:22px;height:2px;margin:5px auto;background:#e2e8f0;transition:.3s}
+.burger[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded=true] span:nth-child(2){opacity:0}
+.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col">
+<a href="#main" onclick="event.preventDefault();document.getElementById('main').focus()" class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:m-2 focus:p-3 focus:rounded focus:bg-emerald-400 focus:text-slate-950">Skip to content</a>
+<header class="print:hidden sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+<div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+<a href="#home" class="text-xl font-bold min-h-[44px] flex items-center gap-2"><span aria-hidden="true">🛡️</span>CyberSafe</a>
+<nav id="dnav" aria-label="Main" class="hidden md:flex gap-1"></nav>
+<button class="ub btn sec hidden md:inline-flex text-sm"></button>
+<button id="bg" class="burger md:hidden w-11 h-11" aria-label="Toggle menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+</div></header>
+<div id="drawer" inert class="print:hidden fixed inset-x-0 top-16 bottom-0 z-30 md:hidden overflow-y-auto bg-slate-950/95 backdrop-blur-md p-6 translate-x-full transition-transform duration-300">
+<nav id="mnav" aria-label="Mobile"></nav>
+<button class="ub btn sec w-full mt-6"></button>
+</div>
+
+<main id="main" tabindex="-1" class="print:hidden flex-1 outline-none">
+
+<section id="p-home" class="pg" hidden><div class="max-w-6xl mx-auto px-4 py-12 md:py-20">
+<div class="text-center max-w-2xl mx-auto">
+<p id="greet" class="text-emerald-400 text-sm mb-3" aria-live="polite"></p>
+<h1 class="text-5xl md:text-7xl font-bold tracking-tight">CyberSafe</h1>
+<p class="mt-5 text-lg text-slate-300">Digital safety for students. Spot scams, build strong passwords and protect your personal information online.</p>
+<div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center"><a href="#modules" class="btn pri">Explore Modules</a><a href="#quiz" class="btn sec">Take Security Quiz</a></div>
+</div>
+<div class="grid md:grid-cols-3 gap-4 mt-14">
+<article class="card"><h2 class="font-semibold text-lg">🎣 Phishing and scams</h2><p class="mt-2 text-sm text-slate-300"><span data-tip="Fake messages that trick you into giving away logins or money." tabindex="0">Phishing</span> emails and texts pose as your school, a bank or a friend to steal your details.</p></article>
+<article class="card"><h2 class="font-semibold text-lg">🔑 Weak passwords</h2><p class="mt-2 text-sm text-slate-300">Short, reused or predictable passwords let attackers break into many accounts at once.</p></article>
+<article class="card"><h2 class="font-semibold text-lg">🕵️ Data privacy risks</h2><p class="mt-2 text-sm text-slate-300">Oversharing and open Wi-Fi expose your location, identity and habits to strangers.</p></article>
+</div></div></section>
+
+<section id="p-modules" class="pg" hidden><div class="max-w-6xl mx-auto px-4 py-10 space-y-6">
+<div><h2 class="text-3xl font-bold">Learning Modules</h2><p class="text-slate-400 mt-1">Read the basics, then practise with the live labs.</p></div>
+<div id="mods" class="space-y-3"></div>
+<div class="card"><h3 class="text-xl font-semibold">🌐 Live Network Privacy Inspector</h3>
+<p class="text-sm text-slate-400 mt-1">Every website sees your public <span data-tip="Internet Protocol address: your network’s identifier on the internet." tabindex="0">IP address</span> and your <span data-tip="Internet Service Provider: the company that connects you to the internet." tabindex="0">ISP</span>. This is part of your digital footprint.</p>
+<dl id="ipo" class="grid sm:grid-cols-2 gap-3 mt-4 text-sm"></dl>
+<p id="ipm" role="status" class="text-sm text-slate-300 mt-3">Press the button to run the scan. It sends one request to ipapi.co.</p>
+<button class="btn sec mt-3" data-a="ip">Scan my footprint</button></div>
+<div class="grid lg:grid-cols-2 gap-6">
+<div class="card"><h3 class="text-xl font-semibold">🔑 Password Strength and Breach Meter</h3>
+<label for="pw" class="block text-sm text-slate-400 mt-1">Type a test password (never your real one)</label>
+<input id="pw" type="password" autocomplete="off" class="inp mt-2">
+<label class="flex items-center gap-2 text-sm min-h-[44px]"><input id="pws" type="checkbox" class="h-5 w-5 accent-emerald-400">Show password</label>
+<div class="h-2 rounded bg-slate-800"><div id="pwb" class="h-2 rounded transition-all"></div></div>
+<p id="pwt" class="text-sm text-slate-300 mt-2"></p><p id="pwl" role="status" class="sr-only"></p>
+<div class="flex flex-wrap gap-2 mt-3"><button class="btn sec" data-a="brc">Check for breaches</button><button class="btn sec" data-a="gen">Generate strong password</button></div>
+<p id="pwr" role="status" class="text-sm mt-2"></p>
+<p class="text-xs text-slate-400 mt-2"><span data-tip="Entropy measures how unpredictable a password is. More bits means harder to guess." tabindex="0">Entropy</span> is estimated in your browser. The breach check sends only 5 characters of a hash (k-anonymity) to haveibeenpwned.com.</p></div>
+<div class="card"><h3 class="text-xl font-semibold">🎣 Spot the Phishing Email</h3>
+<p class="text-sm text-slate-400 mt-1">Red flags found: <b id="phn">0</b> of <span id="pht">4</span></p>
+<div id="em" class="bg-white text-slate-900 rounded-xl p-2 mt-3"></div>
+<p id="phm" role="status" class="text-sm text-slate-300 mt-3"></p>
+<button class="btn sec mt-3" data-a="phr">Next scenario</button></div>
+</div></div></section>
+
+<section id="p-tips" class="pg" hidden><div class="max-w-3xl mx-auto px-4 py-10">
+<h2 class="text-3xl font-bold">Online Safety Tips</h2><p id="tp" class="text-emerald-400 mt-1"></p>
+<div class="flex flex-col sm:flex-row gap-3 mt-4"><input id="tq" type="search" class="inp" placeholder="Search tips" aria-label="Search tips"><select id="tc" class="inp sm:w-52" aria-label="Filter by category"></select></div>
+<ul id="tl" class="mt-4 space-y-2"></ul></div></section>
+
+<section id="p-quiz" class="pg" hidden><div class="max-w-2xl mx-auto px-4 py-10">
+<h2 class="text-3xl font-bold">Security Quiz</h2><div id="qbox" class="card mt-4"></div></div></section>
+
+<section id="p-admin" class="pg" hidden><div class="max-w-6xl mx-auto px-4 py-10">
+<div class="flex flex-wrap items-center justify-between gap-3"><div><h2 class="text-3xl font-bold">Admin Panel</h2><p class="text-slate-400 mt-1">Add, edit or delete content. Changes appear instantly and are stored in this browser. The PIN is a client-side demo only; a real deployment needs server-side login.</p></div><div class="flex flex-wrap gap-2"><button class="btn sec" data-a="exp">Export JSON</button><label class="btn sec cursor-pointer focus-within:ring-2 focus-within:ring-emerald-400">Import JSON<input id="imp" type="file" accept=".json,application/json" class="sr-only"></label><button class="btn sec" data-a="rst">Reset demo data</button></div></div>
+<div id="atabs" class="flex flex-wrap gap-2 mt-6"></div>
+<div id="abox" class="grid md:grid-cols-2 gap-4 mt-4 items-start"></div></div></section>
+
+<section id="p-help" class="pg" hidden><div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
+<div><h2 class="text-3xl font-bold">Think you’ve been scammed?</h2><p class="text-slate-400 mt-1">Act quickly and stay calm. It happens to many people.</p></div>
+<ol class="card list-decimal pl-9 space-y-2"><li>Stop replying. Do not click or pay anything else.</li><li>Change the password of the affected account, then any account that shares it.</li><li>Turn on 2FA and sign out of all other devices.</li><li>Contact your bank or e-wallet provider to freeze cards or dispute payments.</li><li>Tell your school IT team or a trusted adult, and keep screenshots as evidence.</li><li>Report it to the authorities and to the platform.</li></ol>
+<div class="card"><h3 class="font-semibold text-lg">Where to report in the Philippines</h3><p class="mt-2 text-sm text-slate-300">File a complaint with the PNP Anti-Cybercrime Group or the NBI Cybercrime Division, or use the CICC online form at cicc.gov.ph. Misuse of personal data can also go to the National Privacy Commission. Check each agency’s official website for current contact details.</p></div>
+<div class="card"><h3 class="font-semibold text-lg">Glossary</h3><dl class="mt-3 space-y-3 text-sm">
+<div><dt class="font-semibold text-emerald-300">Phishing</dt><dd class="text-slate-300">A fake message that tricks you into sharing logins, codes or money.</dd></div>
+<div><dt class="font-semibold text-emerald-300">Two-factor authentication (2FA)</dt><dd class="text-slate-300">A second proof of identity, such as an app code, on top of your password.</dd></div>
+<div><dt class="font-semibold text-emerald-300">Malware</dt><dd class="text-slate-300">Harmful software such as viruses, spyware or ransomware.</dd></div>
+<div><dt class="font-semibold text-emerald-300">VPN</dt><dd class="text-slate-300">A service that encrypts your traffic and masks your IP address on untrusted networks.</dd></div>
+<div><dt class="font-semibold text-emerald-300">IP address and ISP</dt><dd class="text-slate-300">The number that identifies your network online, and the company that connects you to the internet.</dd></div>
+<div><dt class="font-semibold text-emerald-300">Digital footprint</dt><dd class="text-slate-300">The trail of data you leave through posts, searches, apps and logins.</dd></div>
+<div><dt class="font-semibold text-emerald-300">Data breach</dt><dd class="text-slate-300">When attackers expose stored user data, such as emails and passwords.</dd></div>
+<div><dt class="font-semibold text-emerald-300">Entropy</dt><dd class="text-slate-300">A measure, in bits, of how unpredictable a password is.</dd></div>
+</dl></div></div></section>
+</main>
+<footer class="print:hidden border-t border-slate-800 text-center text-sm text-slate-400 py-6 px-4">CyberSafe: a student cybersecurity awareness project. Think before you click.
+<details class="max-w-xl mx-auto mt-3 text-left"><summary class="cursor-pointer min-h-[44px] flex items-center justify-center">Privacy note</summary><p>Your name, scores and settings stay in this browser (localStorage). External services: cdn.tailwindcss.com for styling; ipapi.co only when you press Scan my footprint; api.pwnedpasswords.com only when you press Check for breaches, and it receives just 5 characters of a password hash.</p></details></footer>
+
+<div id="cert" class="hidden print:block text-slate-900 bg-white"></div>
+<dialog id="dlg" class="card w-[min(92vw,22rem)] m-auto text-slate-100 bg-slate-900 backdrop:bg-black/70"><form method="dialog" class="space-y-3"><p id="dm"></p><input id="di" type="password" autocomplete="off" aria-label="PIN" class="inp"><div class="flex gap-2"><button value="ok" class="btn pri flex-1">OK</button><button value="no" class="btn sec">Cancel</button></div></form></dialog>
+<dialog id="auth" class="card w-[min(92vw,24rem)] m-auto text-slate-100 bg-slate-900 backdrop:bg-black/70">
+<form id="af" class="space-y-3">
+<h2 class="text-xl font-bold">Student sign in</h2>
+<p class="text-sm text-slate-400">A simulated account saved only in this browser.</p>
+<label class="block text-sm">Full name<input id="an" required minlength="2" maxlength="40" autocomplete="name" class="inp mt-1"></label>
+<label class="block text-sm">Student number<input id="as" required pattern="[A-Za-z0-9\-]{4,15}" title="4 to 15 letters, numbers or dashes" class="inp mt-1"></label>
+<div class="flex gap-2"><button class="btn pri flex-1">Continue</button><button type="button" id="ax" class="btn sec">Cancel</button></div>
+</form></dialog>
+<div id="toast" role="status" hidden class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-emerald-400 text-slate-950 font-medium px-4 py-2 rounded-xl"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const K='cybersafe.v2',clone=x=>JSON.parse(JSON.stringify(x));
+const D={
+mods:[
+{t:'Online Threats',b:'Phishing, malware and scams trick you into handing over access. Pause on urgent messages, verify the sender through another channel and never install software from unknown links.'},
+{t:'Data Privacy',b:'Every post, app permission and Wi-Fi connection leaves a digital footprint. Share the minimum, review privacy settings monthly and avoid sensitive logins on public Wi-Fi.'},
+{t:'Password Hygiene',b:'Use long, unique passphrases (14+ characters), a password manager and two-factor authentication (2FA). Never reuse a password.'},
+{t:'Digital Ethics',b:'Respect copyright, credit your sources, never share other people’s private information without consent, and report cyberbullying instead of joining in.'},
+{t:'Know Your Rights (Philippines)',b:'The Data Privacy Act of 2012 (RA 10173) protects your personal data, and you can complain to the National Privacy Commission. The Cybercrime Prevention Act of 2012 (RA 10175) covers offences such as computer-related fraud, identity theft and illegal access. Report scams to the PNP Anti-Cybercrime Group or the NBI Cybercrime Division. This is general education, not legal advice.'}],
+tips:[['Turn on 2FA for your email and school accounts','Accounts'],['Hover over a link to check the real address before clicking','Phishing'],['Use a password manager and a unique password per site','Passwords'],['Avoid logins on public Wi-Fi; use mobile data or a VPN','Privacy'],['Install updates for your phone, apps and browser','Devices'],['Share files with limited-access links, not public ones','Sharing'],['Think before you post: screenshots last forever','Ethics']].map(([t,c],i)=>({id:i+1,t,c})),
+qs:[
+{q:'An email says your account closes in 1 hour unless you click a link. What first?',o:['Click quickly to save the account','Reply with your password','Open the official site yourself and check','Forward it to friends'],a:2,m:'Online Threats',e:'Urgency is a classic phishing trick. Never use the link; go to the official site or app yourself.'},
+{q:'Which password is the strongest?',o:['Password123','Maria2005!','purple-Tiger-lamp-orbit-42','qwerty'],a:2,m:'Password Hygiene',e:'Length and randomness beat predictable substitutions.'},
+{q:'What does two-factor authentication (2FA) add?',o:['Faster logins','A second proof that it is really you','Free storage','No need for passwords'],a:1,m:'Password Hygiene',e:'Even if your password leaks, attackers still need your second factor.'},
+{q:'What is safest on public Wi-Fi?',o:['Online banking','Sharing ID photos','Avoiding sensitive logins, or using a VPN or mobile data','Turning off updates'],a:2,m:'Data Privacy',e:'Open networks can be monitored or spoofed.'},
+{q:'Which sender address looks suspicious?',o:['registrar@school.edu.ph','no-reply@accounts.google.com','secur1ty@paypa1-alerts.net','help@school.edu.ph'],a:2,m:'Online Threats',e:'Look-alike spellings and odd domains are red flags.'},
+{q:'Using someone else’s work without credit is…',o:['Fine if it is online','Plagiarism, so cite it or ask permission','OK if you change a few words','Only wrong in exams'],a:1,m:'Digital Ethics',e:'Ethical internet use means crediting creators and respecting copyright.'},
+{q:'A text says your parcel is held and asks for a $1 fee at a short link. Legit or phishing?',o:['Legit','Phishing'],a:1,m:'Online Threats',e:'Real couriers do not collect card details through short links in texts. Check the courier’s official app.'},
+{q:'A classmate’s account sends “is this you in this video?” with a login link. Legit or phishing?',o:['Legit','Phishing'],a:1,m:'Online Threats',e:'Hijacked accounts spread bait to friends. Confirm with your classmate through another channel.'},
+{q:'You just requested a password reset, and an email arrives from that site’s real domain with no urgent threats. Legit or phishing?',o:['Likely legit','Phishing'],a:0,m:'Online Threats',e:'You started the request and nothing looks off. If unsure, type the site address yourself instead of using the link.'},
+{q:'How should you treat passwords across different sites?',o:['Reuse one to remember it','Use a unique one for each site','Reuse one for school sites only','Change one letter per site'],a:1,m:'Password Hygiene',e:'One breach would otherwise unlock all your accounts.'},
+{q:'An app asks for your contacts and location, but does not need them. What should you do?',o:['Allow everything','Deny the extra permissions','Give it admin rights','Ask a friend to allow it'],a:1,m:'Data Privacy',e:'Grant the least access an app needs to work.'},
+{q:'Someone posts an embarrassing photo of a classmate. What is the responsible response?',o:['Share it for a laugh','Comment and tease','Do not share it, and report it','Save it for later'],a:2,m:'Digital Ethics',e:'Sharing multiplies the harm. Report it to the platform or a teacher.'},
+{q:'You find a free copy of a paid textbook on a random site. What is the ethical choice?',o:['Download and share it','Use the library or a licensed source','Post it on social media','Sell copies'],a:1,m:'Digital Ethics',e:'Pirated files harm creators and often carry malware.'},
+{q:'Which is a sign of a safe login page?',o:['A padlock alone proves it is safe','The exact, correct domain in the address bar','Lots of logos','A countdown timer'],a:1,m:'Online Threats',e:'The padlock only means the connection is encrypted. Scam sites can have one too, so check the domain itself.'}],
+hist:[],chk:[],u:null,pf:false};
+let S=clone(D),qz=null,ad={k:'mods',e:null},adm=false,ph=new Set(),tm;
+try{Object.assign(S,JSON.parse(localStorage.getItem(K))||{})}catch(e){}
+['mods','tips','qs','hist','chk'].forEach(k=>Array.isArray(S[k])||(S[k]=clone(D)[k]));
+const say=m=>{const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tm);tm=setTimeout(()=>t.hidden=true,3200)};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){say('Could not save: browser storage is blocked.')}};
+const P=[['home','Home'],['modules','Modules'],['tips','Tips'],['quiz','Quiz'],['help','Help'],['admin','Admin']];
+const nav=c=>P.map(([h,l])=>`<a href="#${h}" class="${c}" data-n="${h}">${l}</a>`).join('');
+const bd=p=>p>=90?'Cyber Guardian Level 3':p>=70?'Cyber Guardian Level 2':p>=50?'Cyber Guardian Level 1':'Security Rookie';
+const F={mods:[['t','Title'],['b','Content','ta']],tips:[['t','Tip'],['c','Category']],qs:[['q','Question'],['o','Options (separate with |, 2 to 4)'],['a','Correct option number'],['m','Module title (optional)'],['e','Explanation','ta']]};
+const TL={mods:'Articles',tips:'Tips',qs:'Quiz questions'};
+const fv=(k,x,f)=>!x?'':k=='qs'&&f=='o'?x.o.join(' | '):k=='qs'&&f=='a'?x.a+1:x[f];
+
+const COMMON=/password|passw0rd|qwerty|asdf|zxcv|admin|welcome|letmein|iloveyou|dragon|monkey|football|abc123|123456|111111|login|master|secret|school|student|sunshine/;
+const crack=b=>{const s=2**b/2e10;if(s<1)return 'instantly';const u=[[60,'minutes'],[60,'hours'],[24,'days'],[365,'years'],[100,'centuries']];let v=s,n='seconds';for(const [d,x] of u){if(v<d)break;v/=d;n=x}return n=='centuries'&&v>1.4e8?'longer than the age of the universe':Math.round(v).toLocaleString()+' '+n};
+let ls=-1;
+const sh=a=>{a=[...a];for(let i=a.length;i>1;){const j=Math.floor(Math.random()*i--);[a[i],a[j]]=[a[j],a[i]]}return a};
+const ask=(m,pin)=>new Promise(r=>{const d=$('#dlg'),i=$('#di');$('#dm').textContent=m;i.hidden=!pin;i.value='';d.returnValue='';d.onclose=()=>r(d.returnValue=='ok'?(pin?i.value:true):(pin?null:false));d.showModal()});
+const V={mods:x=>typeof x.t=='string'&&typeof x.b=='string',tips:x=>typeof x.t=='string'&&typeof x.c=='string',qs:x=>typeof x.q=='string'&&typeof x.e=='string'&&Array.isArray(x.o)&&x.o.length>1&&x.o.length<5&&x.o.every(o=>typeof o=='string')&&Number.isInteger(x.a)&&x.a>=0&&x.a<x.o.length};
+function loadContent(j){let n=0;for(const k in V)if(Array.isArray(j[k])){S[k]=j[k].filter(x=>x&&V[k](x)).map((x,i)=>k=='mods'?{t:x.t,b:x.b}:k=='tips'?{id:Date.now()+i,t:x.t,c:x.c}:{q:x.q,o:x.o,a:x.a,e:x.e,m:typeof x.m=='string'?x.m:''});n+=S[k].length}if(!n)throw 0;S.chk=[];return n}
+function menu(o){$('#bg').setAttribute('aria-expanded',o);const d=$('#drawer');d.classList.toggle('translate-x-full',!o);d.inert=!o;document.body.classList.toggle('overflow-hidden',o)}
+async function route(){
+let h=location.hash.slice(1)||'home';if(!P.some(p=>p[0]==h))h='home';
+if(h=='admin'&&!adm){if(await ask('Instructor PIN (demo PIN: 2468)',1)==='2468')adm=true;else{say('Admin access denied');h='home';history.replaceState(null,'','#home')}}
+$$('.pg').forEach(s=>s.hidden=s.id!='p-'+h);
+$$('[data-n]').forEach(a=>h==a.dataset.n?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+menu(false);scrollTo(0,0)}
+
+function rUser(){const u=S.u,mine=u?S.hist.filter(h=>h.u==u.n):[],best=Math.max(0,...mine.map(h=>Math.round(h.s/h.n*100)));
+$$('.ub').forEach(b=>b.textContent=u?`👤 ${u.n.split(' ')[0]}${mine.length?' (best '+best+'%)':''}`:'Log in or register');
+$('#greet').textContent=u?`Welcome back, ${u.n}. Quizzes completed: ${mine.length}.`:'Free awareness training for students'}
+const rMods=()=>$('#mods').innerHTML=S.mods.map(m=>`<details class="card"><summary class="cursor-pointer py-2 min-h-[44px] font-semibold text-lg">${esc(m.t)}</summary><p class="mt-2 text-slate-300 leading-relaxed">${esc(m.b)}</p></details>`).join('')||'<p class="text-slate-400">No modules yet. Add one in the Admin panel.</p>';
+const tp=()=>$('#tp').textContent=`${S.tips.filter(t=>S.chk.includes(t.id)).length} of ${S.tips.length} completed`;
+function rTips(){const sel=$('#tc'),c=sel.value;
+sel.innerHTML='<option value="">All categories</option>'+[...new Set(S.tips.map(t=>t.c))].map(x=>`<option>${esc(x)}</option>`).join('');sel.value=c;
+const q=$('#tq').value.toLowerCase();
+$('#tl').innerHTML=S.tips.filter(t=>(!sel.value||t.c==sel.value)&&(t.t+' '+t.c).toLowerCase().includes(q)).map(t=>`<li><label class="card flex gap-3 items-start min-h-[44px] cursor-pointer !p-4 hover:border-emerald-400"><input type="checkbox" data-t="${t.id}" ${S.chk.includes(t.id)?'checked':''} class="mt-0.5 h-5 w-5 shrink-0 accent-emerald-400"><span>${esc(t.t)} <em class="not-italic ml-1 text-xs px-2 py-0.5 rounded-full bg-emerald-400/10 text-emerald-300">${esc(t.c)}</em></span></label></li>`).join('')||'<li class="text-slate-400">No tips match your search.</li>';
+tp()}
+
+function rQuiz(foc){const el=$('#qbox'),n=qz?qz.l.length:0;let h;
+if(!qz)h=`<p class="text-slate-300">${S.qs.length} questions with instant feedback. Results are saved on this device.</p><button class="btn pri mt-4" data-a="qs" ${S.qs.length?'':'disabled'}>Start quiz</button>`;
+else if(qz.i>=n){const p=Math.round(qz.s/n*100),wk=[...new Set(qz.w.filter(Boolean))];h=`<p tabindex="-1" class="outline-none"><span class="text-sm text-emerald-400">Quiz complete</span><br><span class="text-5xl font-bold">${qz.s}/${n}</span> <span class="text-xl text-slate-400">(${p}%)</span></p><p class="text-xl text-emerald-300 mt-2">🏅 ${bd(p)}</p>${wk.length?`<p class="mt-3 text-sm text-slate-300">Review these modules: ${wk.map(esc).join(', ')}. <a href="#modules" class="underline text-emerald-300">Open Modules</a></p>`:''}<button class="btn pri mt-4" data-a="qs">Retake quiz</button> <button class="btn sec mt-4" data-a="cert">Print certificate</button>`}
+else{const q=qz.l[qz.i];h=`<p class="text-sm text-slate-400">Question ${qz.i+1} of ${n}</p><div class="h-1.5 rounded bg-slate-800 mt-2"><div class="h-1.5 rounded bg-emerald-400" style="width:${qz.i/n*100}%"></div></div><fieldset class="mt-4"><legend tabindex="-1" class="text-lg font-semibold mb-3 outline-none">${esc(q.q)}</legend>${q.o.map((o,j)=>`<label class="flex items-center gap-3 min-h-[44px] p-3 mb-2 rounded-xl border border-slate-700 cursor-pointer hover:border-emerald-400"><input type="radio" name="o" value="${j}" class="h-5 w-5 shrink-0 accent-emerald-400">${esc(o)}</label>`).join('')}</fieldset><div id="qf" role="status"></div>`}
+const hs=S.hist.slice(-5).reverse().map(x=>`<li class="flex justify-between gap-3 py-2 border-b border-slate-800 text-sm"><span>${new Date(x.d).toLocaleDateString()}, ${esc(x.u)}</span><span class="text-right">${x.s}/${x.n}, ${bd(Math.round(x.s/x.n*100))}</span></li>`).join('');
+el.innerHTML=h+prog()+`<h3 class="mt-8 font-semibold">Recent results</h3><ul>${hs||'<li class="text-sm text-slate-400 py-2">No attempts yet.</li>'}</ul>`;
+if(foc){const f=el.querySelector('[tabindex="-1"]');f&&f.focus()}}
+function prog(){const me=S.u?S.u.n:'Guest',m=S.hist.filter(x=>x.u==me).slice(-10),pc=x=>Math.round(x.s/x.n*100),
+bs=[m.length&&'First quiz',m.some(x=>pc(x)==100)&&'Perfect score',m.length>=5&&'Quiz regular',S.pf&&'Phish Hunter',S.tips.length&&S.tips.every(t=>S.chk.includes(t.id))&&'Tip Master'].filter(Boolean);
+return `<h3 class="mt-8 font-semibold">My progress</h3>${m.length?`<div class="flex items-end gap-1 h-24 mt-2" role="img" aria-label="Scores of your last ${m.length} quizzes: ${m.map(x=>pc(x)+'%').join(', ')}">${m.map(x=>`<div class="flex-1 rounded-t bg-emerald-400/80" style="height:${Math.max(pc(x),4)}%" title="${pc(x)}%"></div>`).join('')}</div>`:'<p class="text-sm text-slate-400 mt-1">Finish a quiz to see your score chart.</p>'}<p class="text-sm text-slate-300 mt-2">Badges: ${bs.join(', ')||'none yet'}</p>`}
+function ans(j){const q=qz.l[qz.i],ok=j==q.a;if(ok)qz.s++;else qz.w.push(q.m);
+$$('#qbox label').forEach((l,x)=>{l.classList.add(...(x==q.a?['border-emerald-400','bg-emerald-400/10']:x==j?['border-red-400','bg-red-400/10']:['opacity-60']));l.querySelector('input').disabled=true});
+$('#qf').innerHTML=`<p class="font-semibold ${ok?'text-emerald-300':'text-red-300'}">${ok?'✅ Correct!':'❌ Not quite.'}</p><p class="text-sm text-slate-300 mt-1">${esc(q.e)}</p><button class="btn pri mt-3" data-a="nx">${qz.i+1<qz.l.length?'Next question':'See results'}</button>`}
+
+function rAdmin(){const k=ad.k,x=ad.e!=null?S[k][ad.e]:null;
+$('#atabs').innerHTML=Object.keys(TL).map(t=>`<button class="btn ${t==k?'pri':'sec'}" data-a="tab" data-k="${t}">${TL[t]} (${S[t].length})</button>`).join('');
+const li=S[k].map((it,i)=>{const t=esc(it.t||it.q);return `<li class="flex items-center gap-2 py-1 border-b border-slate-800"><span class="flex-1 min-w-0 truncate">${t}</span><button class="btn sec !px-3" data-a="ed" data-i="${i}" aria-label="Edit ${t}">Edit</button><button class="btn sec !px-3 text-red-300" data-a="del" data-i="${i}" aria-label="Delete ${t}">Delete</button></li>`}).join('');
+const fm=F[k].map(([f,l,ta])=>`<label class="block text-sm mt-3">${l}${ta?`<textarea id="f_${f}" rows="4" class="inp py-2 mt-1">${esc(fv(k,x,f))}</textarea>`:`<input id="f_${f}" class="inp mt-1" value="${esc(fv(k,x,f))}">`}</label>`).join('');
+$('#abox').innerHTML=`<div class="card"><h3 class="font-semibold mb-2">${TL[k]} (${S[k].length})</h3><ul>${li||'<li class="text-slate-400">Nothing yet. Add the first item.</li>'}</ul></div><form id="aform" class="card"><h3 class="font-semibold">${x?'Edit item':'Add new item'}</h3>${fm}<div class="flex gap-2 mt-4"><button class="btn pri">Save changes</button>${x?'<button type="button" class="btn sec" data-a="can">Cancel</button>':''}</div></form>`}
+function adSave(){const k=ad.k,o={};
+for(const [f] of F[k])o[f]=$('#f_'+f).value.trim();
+if(Object.entries(o).some(([f,v])=>!v&&f!='m'))return say('Please fill in every field.');
+if(k=='qs'){o.o=o.o.split('|').map(s=>s.trim()).filter(Boolean);o.a=+o.a-1;if(o.o.length<2||o.o.length>4||!(o.a>=0&&o.a<o.o.length))return say('Use 2 to 4 options and a valid correct option number.')}
+if(ad.e!=null)Object.assign(S[k][ad.e],o);else S[k].push(k=='tips'?{...o,id:Date.now()}:o);
+ad.e=null;save();render();say('Saved')}
+function render(){qz=null;rUser();rMods();rTips();rQuiz();rAdmin()}
+
+async function ip(){const o=$('#ipo'),m=$('#ipm');o.innerHTML='';m.textContent='Scanning…';
+try{const c=new AbortController(),t=setTimeout(()=>c.abort(),7000),r=await fetch('https://ipapi.co/json/',{signal:c.signal});clearTimeout(t);
+if(!r.ok)throw 0;const d=await r.json();if(d.error||!d.ip)throw 0;
+o.innerHTML=[['Public IP',d.ip],['Approximate location',[d.city,d.region,d.country_name].filter(Boolean).join(', ')],['ISP / network',d.org],['Timezone',d.timezone]].map(([k,v])=>`<div class="rounded-xl bg-slate-950 p-3"><dt class="text-xs text-slate-400">${k}</dt><dd class="font-mono break-all">${esc(v||'Unknown')}</dd></div>`).join('');
+m.textContent='Any site can see this without asking. A VPN masks your IP, and avoiding open public Wi-Fi limits snooping on your traffic.'}
+catch(e){m.textContent=navigator.onLine?'Live lookup unavailable (blocked or rate-limited). Remember: your IP address reveals your approximate location and ISP to every site you visit.':'You are offline, so the live scan cannot run. Remember: your IP address reveals your approximate location and ISP to every site you visit.'}}
+function pwe(){const p=$('#pw').value,b=$('#pwb'),t=$('#pwt');$('#pwr').textContent='';
+if(!p){b.style.width=0;ls=-1;return t.textContent='Start typing to see feedback.'}
+const pool=(/[a-z]/.test(p)&&26)+(/[A-Z]/.test(p)&&26)+(/\d/.test(p)&&10)+(/[^A-Za-z0-9]/.test(p)&&32),why=[],low=p.toLowerCase(),
+lw=low.replace(/[@4]/g,'a').replace(/3/g,'e').replace(/[1!|]/g,'i').replace(/0/g,'o').replace(/[$5]/g,'s').replace(/7/g,'t'),w=p.split(/[-_ .]+/).filter(Boolean);
+let bits=Math.round(p.length*Math.log2(pool||1));
+if(w.length>2&&w.every(x=>/^[A-Za-z]*\d*$/.test(x)&&x.length<11))bits=Math.min(bits,w.length*11+(/\d/.test(p)?4:0)+(/[A-Z]/.test(p)?2:0));
+if(COMMON.test(low)||COMMON.test(lw)){bits=Math.min(bits,24);why.push('contains a common word or keyboard pattern')}
+if(/^[A-Za-z]{3,14}\d{1,4}[^A-Za-z0-9]{0,2}$/.test(p)){bits=Math.min(bits,32);why.push('looks like a word plus numbers')}
+if(/(19|20)\d\d/.test(p)){bits-=10;why.push('includes a year')}
+if(/(.)\1{2,}|0123|1234|2345|3456|4567|5678|6789|abcd/i.test(p)){bits-=12;why.push('has repeats or sequences')}
+bits=Math.max(0,bits);
+const s=bits<28?0:bits<40?1:bits<60?2:bits<80?3:4,L=['Very weak','Weak','Fair','Strong','Excellent'][s],
+tip=[p.length<12&&'use 12+ characters',!/[A-Z]/.test(p)&&'add capitals',!/\d/.test(p)&&'add numbers',!/[^A-Za-z0-9]/.test(p)&&'add symbols'].filter(Boolean);
+b.style.width=(s+1)*20+'%';b.style.background=['#ef4444','#f97316','#eab308','#22c55e','#34d399'][s];
+t.textContent=`${L}: about ${bits} bits. Estimated offline cracking time: ${crack(bits)}.${why.length?' Weakened because it '+why.join(' and ')+'.':''}${tip.length?' Try to '+tip.join(', ')+'.':''}`;
+if(ls!=s){ls=s;$('#pwl').textContent='Strength: '+L}}
+async function brc(){const p=$('#pw').value,o=$('#pwr');if(!p)return o.textContent='Type a password first.';o.textContent='Checking…';
+try{const h=[...new Uint8Array(await crypto.subtle.digest('SHA-1',new TextEncoder().encode(p)))].map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase(),r=await fetch('https://api.pwnedpasswords.com/range/'+h.slice(0,5));if(!r.ok)throw 0;
+const m=(await r.text()).split('\n').find(l=>l.startsWith(h.slice(5)));
+o.textContent=m?`⚠️ Seen in ${(+m.split(':')[1]).toLocaleString()} known data breaches. Never use it.`:'✅ Not found in known breaches. Still use a unique password on every site.'}
+catch(e){o.textContent=window.isSecureContext?'Breach check unavailable (offline or blocked). The strength meter still works.':'The breach check needs HTTPS or localhost. Open the site from a secure address such as GitHub Pages. The strength meter still works.'}}
+const SC=[
+['Email',[['From: security@paypa1-support.com',1,'Red flag! The domain is a look-alike: “paypa1” uses the number 1, and it is not PayPal’s real domain.'],['Subject: URGENT, account suspended in 24 hours!',1,'Red flag! Scammers create panic so you act before you think.'],['Dear Customer,',1,'Red flag! Real companies usually address you by name.'],['Verify now: http://paypal.secure-login.xyz/verify',1,'Red flag! The link leads to secure-login.xyz, not paypal.com. Hover before you click.'],['Thank you for being a valued member.',0,'Not a red flag. Friendly wording alone is normal. Check the sender, urgency, greeting and links.'],['© 2026 PayPal Inc. All rights reserved.',0,'Not proof of anything. Footers are easy to copy, so they never show who really sent the email.']]],
+['Text message',[['From: +1 555 0147 (unknown number)',1,'Red flag! Real banks and couriers text from verified sender names, not random numbers.'],['Your wallet is locked. Tap bit.ly/3xYz now to unlock it.',1,'Red flag! Short links hide the real destination, and “now” adds pressure.'],['Reply with the 6-digit code we just sent to confirm it is you.',1,'Red flag! Never share a one-time code. Anyone asking for it is trying to take over your account.'],['Have a great day!',0,'Not a red flag. A polite closing proves nothing either way.']]],
+['Direct message',[['@scholar.grants.official (new account, 12 followers)',1,'Red flag! New, unverified accounts that contact you first deserve suspicion.'],['Congratulations! You won a $500 scholarship you never applied for.',1,'Red flag! A prize for a contest you never entered is bait.'],['Pay a $20 processing fee today to claim it.',1,'Red flag! Real scholarships never charge a fee to receive money.'],['Send a photo of your school ID and your birth date.',1,'Red flag! Scammers collect ID details for identity theft.'],['Hi! I hope you are doing well.',0,'Not a red flag. A friendly greeting alone proves nothing.']]]];
+let sc=Math.floor(Math.random()*SC.length)-1,PH=[];
+function phr(){sc=(sc+1)%SC.length;PH=SC[sc][1];ph=new Set();$('#phn').textContent=0;$('#pht').textContent=PH.filter(r=>r[1]).length;$('#phm').textContent='Tap any line you think is suspicious.';
+$('#em').innerHTML=`<p class="px-3 pt-1 pb-2 text-sm font-semibold">${SC[sc][0]}</p>`+PH.map(([t],i)=>`<button type="button" data-f="${i}" class="block w-full text-left min-h-[44px] px-3 py-2 rounded-lg hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-900">${esc(t)}</button>`).join('')}
+function flag(b){const i=+b.dataset.f,f=PH[i][1],T=PH.filter(r=>r[1]).length;b.classList.remove('hover:bg-slate-200');b.classList.add(f?'bg-emerald-200':'bg-red-200');if(f)ph.add(i);
+const all=ph.size==T;$('#phn').textContent=ph.size;$('#phm').textContent=(f?'✅ ':'❌ ')+PH[i][2]+(all?' You found all '+T+' red flags!':'');if(all&&!S.pf){S.pf=true;save();say('Badge earned: Phish Hunter')}}
+
+document.addEventListener('click',e=>{
+const f=e.target.closest('[data-f]'),a=e.target.closest('[data-a]');
+if(f)return flag(f);if(!a)return;
+const i=+a.dataset.i,H={ip,brc,phr,
+qs(){qz={i:0,s:0,w:[],l:sh(S.qs).map(q=>{const s=sh(q.o.map((t,k)=>({t,c:k==q.a})));return{...q,o:s.map(x=>x.t),a:s.findIndex(x=>x.c)}})};rQuiz(1)},
+gen(){const cs='abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*-_=+?',n=cs.length,max=256-256%n,o=[];
+while(o.length<18)for(const x of crypto.getRandomValues(new Uint8Array(32)))if(x<max&&o.length<18)o.push(cs[x%n]);
+const i=$('#pw');i.value=o.join('');i.type='text';$('#pws').checked=true;pwe();say('Generated. Store it in a password manager.')},
+exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({mods:S.mods,tips:S.tips,qs:S.qs},null,2)],{type:'application/json'}));a.download='cybersafe-content.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)},
+cert(){const n=qz.l.length,p=Math.round(qz.s/n*100);$('#cert').innerHTML=`<div class="border-4 border-slate-900 p-10 text-center m-8"><p class="text-xl">Certificate of Completion</p><h1 class="text-4xl font-bold my-6">${esc(S.u?S.u.n:'CyberSafe Student')}</h1><p>scored ${qz.s} out of ${n} (${p}%) in the CyberSafe Security Quiz</p><p class="text-2xl font-semibold my-4">${bd(p)}</p><p>${new Date().toLocaleDateString()}</p></div>`;print()},
+
+nx(){qz.i++;if(qz.i>=qz.l.length){S.hist=[...S.hist,{d:Date.now(),u:S.u?S.u.n:'Guest',s:qz.s,n:qz.l.length}].slice(-30);save();rUser()}rQuiz(1)},
+tab(){ad={k:a.dataset.k,e:null};rAdmin()},
+ed(){ad.e=i;rAdmin();$('#f_'+F[ad.k][0][0]).focus()},
+can(){ad.e=null;rAdmin()},
+async del(){if(await ask('Delete this item?')){S[ad.k].splice(i,1);ad.e=null;save();render();say('Deleted')}},
+async rst(){if(await ask('Reset all content and results to defaults?')){S={...clone(D),u:S.u};ad.e=null;save();render();say('Defaults restored')}}};
+H[a.dataset.a]&&H[a.dataset.a]()});
+document.addEventListener('change',e=>{const t=e.target;
+if(t.name=='o')ans(+t.value);
+else if(t.id=='tc')rTips();
+else if(t.id=='pws')$('#pw').type=t.checked?'text':'password';
+else if(t.id=='imp'){const f=t.files[0];t.value='';if(f&&f.size<1e6)f.text().then(x=>{try{const n=loadContent(JSON.parse(x));ad.e=null;save();render();say('Imported '+n+' items')}catch(e){say('Invalid content file.')}})}
+else if(t.dataset.t){const id=+t.dataset.t;S.chk=t.checked?[...new Set([...S.chk,id])]:S.chk.filter(x=>x!=id);save();tp()}});
+document.addEventListener('input',e=>{if(e.target.id=='pw')pwe();if(e.target.id=='tq')rTips()});
+document.addEventListener('submit',e=>{if(e.target.method=='dialog')return;e.preventDefault();const i=e.target.id;
+if(i=='af'){S.u={n:$('#an').value.trim(),id:$('#as').value.trim()};save();$('#auth').close();rUser();say('Welcome, '+S.u.n+'!')}
+else if(i=='aform')adSave()});
+document.addEventListener('keydown',e=>e.key=='Escape'&&menu(false));
+$('#bg').onclick=()=>menu($('#bg').getAttribute('aria-expanded')!='true');
+$('#mnav').onclick=()=>menu(false);
+$('#ax').onclick=()=>$('#auth').close();
+$$('.ub').forEach(b=>b.onclick=async()=>{menu(false);if(S.u){if(await ask('Log out '+S.u.n+'?')){S.u=null;save();rUser()}}else $('#auth').showModal()});
+$('#dnav').innerHTML=nav('nl');$('#mnav').innerHTML=nav('ml');
+phr();pwe();render();route();
+try{if(!localStorage.getItem(K))fetch('content.json').then(r=>r.ok?r.json():0).then(j=>{if(j){loadContent(j);render()}}).catch(()=>{})}catch(e){}
+addEventListener('hashchange',route);
+</script>
+</body>
+</html>
